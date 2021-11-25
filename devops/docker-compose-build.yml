@@ -1,0 +1,37 @@
+version: '3.8'
+
+services:
+  api:
+    container_name: CoM-api
+    build: ../backend/
+    volumes:
+      - ../backend:/api
+    ports:
+      - "4000:4000"
+    depends_on:
+      - mongodb
+
+  mongodb:
+    container_name: CoM-database
+    image: mongodb
+    environment:
+      - PUID=1000
+      - PGID=1000
+    volumes:
+      - mongodb:/data/db
+    ports:
+      - "21017:21017"
+    restart: unless-stopped
+
+  front:
+    container_name: CoM-front
+    build: ../frontend/
+    volumes:
+      - ../frontend:/app
+    ports:
+      - "3000:3000"
+    depends_on:
+      - api
+  
+volumes:
+  mongodb:
