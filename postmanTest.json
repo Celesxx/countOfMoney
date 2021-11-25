@@ -1,0 +1,403 @@
+{
+	"info": {
+		"_postman_id": "0500f701-2994-45cc-8ca4-b6aa60c1ab02",
+		"name": "Coun of money",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Single test",
+			"item": [
+				{
+					"name": "Users test",
+					"item": [
+						{
+							"name": "add user",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Is user added\", function () {",
+											"    var jsonData = pm.response.json();",
+											"    pm.expect(pm.response.code).to.be.oneOf([200,201,202]);",
+											"});",
+											"",
+											"pm.test(\"Is state equal to true\", function () {",
+											"    var jsonData = pm.response.json();",
+											"    console.log(jsonData)",
+											"    pm.expect(jsonData.data.state).to.equal(true);",
+											"});",
+											"",
+											"pm.test(\"Is return id\", function () {",
+											"    var jsonData = pm.response.json();",
+											"    pm.expect(jsonData.data.id).not.to.equal(undefined)",
+											"});",
+											"",
+											"pm.test(\"userId env is set\", function () {",
+											"    var userId = pm.response.json().data.id;",
+											"    pm.environment.set(\"userId\", userId);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "x-access-token",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxODJlMTc5NTE4MGIyMDMyMjc2MjUyMiIsImlhdCI6MTYzNjAxNjc3MiwiZXhwIjoxNjM2NjIxNTcyfQ.JcPpfDGraydSukCkU_J73H3Fgu1jcijjCuIUo-EPVjk",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"email\": \"cameron@epitech.eu\",\n    \"username\" : \"cameron\",\n    \"role\" : \"admin\",\n    \"password\" : \"123\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:4000/users/register",
+									"host": [
+										"localhost"
+									],
+									"port": "4000",
+									"path": [
+										"users",
+										"register"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "get users",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Is user added\", function () {",
+											"    var jsonData = pm.response.json();",
+											"    pm.expect(pm.response.code).to.be.oneOf([200,201,202]);",
+											"});",
+											"",
+											"pm.test(\"Is return data\", function () {",
+											"    var jsonData = pm.response.json();",
+											"    pm.expect(jsonData.data.data).not.to.equal(undefined)",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "x-access-token",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxOWY1YTUyZDU4YWUxMmNjYmIwOTlhMSIsImlhdCI6MTYzNzgzMzI5OCwiZXhwIjoxNjM4NDM4MDk4fQ.dfr2qy7XXmw6K4OLgSzSjjr7EHiDQkX6j5I6coxne2A",
+										"description": "admin\n",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "localhost:4000/users/",
+									"host": [
+										"localhost"
+									],
+									"port": "4000",
+									"path": [
+										"users",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "get users by id",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Is user getted\", function () {",
+											"    var jsonData = pm.response.json();",
+											"    pm.expect(pm.response.code).to.be.oneOf([200,201,202]);",
+											"});",
+											"",
+											"pm.test(\"Is state equal to true\", function () {",
+											"    var jsonData = pm.response.json();",
+											"    pm.expect(jsonData.data.state).to.equal(true);",
+											"});",
+											"",
+											"pm.test(\"Is return data\", function () {",
+											"    var jsonData = pm.response.json();",
+											"    pm.expect(jsonData.data.id).not.to.equal(undefined)",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "x-access-token",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxOWY1YTUyZDU4YWUxMmNjYmIwOTlhMSIsImlhdCI6MTYzNzgzMzI5OCwiZXhwIjoxNjM4NDM4MDk4fQ.dfr2qy7XXmw6K4OLgSzSjjr7EHiDQkX6j5I6coxne2A",
+										"description": "admin cameron",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"url": {
+									"raw": "localhost:4000/users/619f524a0b0cd6447498177b",
+									"host": [
+										"localhost"
+									],
+									"port": "4000",
+									"path": [
+										"users",
+										"619f524a0b0cd6447498177b"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "get users by mail",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"user added\", function () {",
+											"    var jsonData = pm.response.json();",
+											"    pm.expect(pm.response.code).to.be.oneOf([200,201,202]);",
+											"});",
+											"",
+											"pm.test(\"username saved\", function () {",
+											"    var jsonData = pm.response.json();",
+											"    pm.expect(jsonData.data.username).not.to.equal(undefined)",
+											"});",
+											"",
+											"pm.test(\"email saved\", function () {",
+											"    var jsonData = pm.response.json();",
+											"    pm.expect(jsonData.data.email).not.to.eql(undefined) ",
+											"});",
+											"",
+											"pm.test(\"role saved\", function () {",
+											"    var jsonData = pm.response.json();",
+											"    pm.expect(jsonData.data.role).not.to.eql(undefined) ",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "x-access-token",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxOWY1YTUyZDU4YWUxMmNjYmIwOTlhMSIsImlhdCI6MTYzNzgzMzI5OCwiZXhwIjoxNjM4NDM4MDk4fQ.dfr2qy7XXmw6K4OLgSzSjjr7EHiDQkX6j5I6coxne2A",
+										"description": "admin cameron",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "localhost:4000/users/getUserByMail?email=cameron@epitech.eu",
+									"host": [
+										"localhost"
+									],
+									"port": "4000",
+									"path": [
+										"users",
+										"getUserByMail"
+									],
+									"query": [
+										{
+											"key": "email",
+											"value": "cameron@epitech.eu"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "update user",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"user added\", function () {",
+											"    var jsonData = pm.response.json();",
+											"    pm.expect(pm.response.code).to.be.oneOf([200,201,202]);",
+											"});",
+											"",
+											"pm.test(\"username saved\", function () {",
+											"    var jsonData = pm.response.json();",
+											"    pm.expect(jsonData.data.username).not.to.equal(undefined)",
+											"});",
+											"",
+											"pm.test(\"email saved\", function () {",
+											"    var jsonData = pm.response.json();",
+											"    pm.expect(jsonData.data.email).not.to.eql(undefined) ",
+											"});",
+											"",
+											"pm.test(\"role saved\", function () {",
+											"    var jsonData = pm.response.json();",
+											"    pm.expect(jsonData.data.role).not.to.eql(undefined) ",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "x-access-token",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxOWY1YTUyZDU4YWUxMmNjYmIwOTlhMSIsImlhdCI6MTYzNzgzMzI5OCwiZXhwIjoxNjM4NDM4MDk4fQ.dfr2qy7XXmw6K4OLgSzSjjr7EHiDQkX6j5I6coxne2A",
+										"description": "admin cameron",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"email\": \"cameron@epitech.eu\",\n    \"username\" : \"Cameron\",\n    \"role\" : \"admin\",\n    \"password\" : \"123\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:4000/users/619f524a0b0cd6447498177b",
+									"host": [
+										"localhost"
+									],
+									"port": "4000",
+									"path": [
+										"users",
+										"619f524a0b0cd6447498177b"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "delete user",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"user added\", function () {",
+											"    pm.expect(pm.response.code).to.be.oneOf([200,201,202,204]);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "x-access-token",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxOWY1YTUyZDU4YWUxMmNjYmIwOTlhMSIsImlhdCI6MTYzNzgzMzI5OCwiZXhwIjoxNjM4NDM4MDk4fQ.dfr2qy7XXmw6K4OLgSzSjjr7EHiDQkX6j5I6coxne2A",
+										"description": "admin cameron",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "localhost:4000/users/619f598bd58ae12ccbb0999c",
+									"host": [
+										"localhost"
+									],
+									"port": "4000",
+									"path": [
+										"users",
+										"619f598bd58ae12ccbb0999c"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "login",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"email\": \"arnaud@epitech.eu\",\n    \"password\" : \"123\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:4000/api/login",
+									"host": [
+										"localhost"
+									],
+									"port": "4000",
+									"path": [
+										"api",
+										"login"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Automatic test",
+			"item": []
+		}
+	]
+}

@@ -26,6 +26,7 @@ mongoose.connect(process.env.MONGODB_URI , { useNewUrlParser: true, useUnifiedTo
 });
 
 require('./routeur/user.router.js')(app)
+require('./routeur/login.router.js')(app)
 
 var server = app.listen(process.env.PORT || 4000, function () 
 { 
