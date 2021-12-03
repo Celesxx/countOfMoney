@@ -1,9 +1,11 @@
 import logo from './logo.svg';
+import LoginModal from './LoginModal.js'
 import './App.css';
 
 function App() {
   return (
     <div className="App">
+      <LoginModal />
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
