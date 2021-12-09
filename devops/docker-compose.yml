@@ -11,35 +11,16 @@ services:
     environment:
         JWTSECRET: ${JWTSECRET}
         MONGODB_URI: ${MONGODB_URI}
-    #   MONGODB_URI: mongodb://${MONGO_USERNAME}:${MONGO_PASSWORD}@database/${MONGO_DATABASE}
-    # depends_on:
-    #   - database
-
-  # database:
-  #   container_name: CoM-database
-  #   image: mongo:latest
-  #   env_file:
-  #     - .env
-  #   # environment:
-  #   #   MONGO_INITDB_ROOT_USERNAME: ${MONGO_USERNAME}
-  #   #   MONGO_INITDB_ROOT_PASSWORD: ${MONGO_PASSWORD}
-  #   #   MONGO_INITDB_DATABASE: ${MONGO_DATABASE}
-  #   volumes:
-  #   #  - ./init-mongo.js:/docker-entrypoint-initdb.d/init-mongo.js:ro
-  #     - ./database:/data/db
-  #   ports:
-  #     - "27017:27017"
-  #   restart: unless-stopped
-
-  # front:
-  #   container_name: CoM-front
-  #   build: ../frontend/
-  #   volumes:
-  #     - ../frontend:/app
-  #   ports:
-  #     - "3000:3000"
-  #   depends_on:
-  #     - api
+    
+  front:
+    container_name: CoM-front
+    build: ../frontend/
+    volumes:
+      - ../frontend:/app
+    ports:
+      - "3000:3000"
+    depends_on:
+      - api
   
 volumes:
   database:
