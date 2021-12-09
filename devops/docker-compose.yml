@@ -1,0 +1,26 @@
+version: '3.8'
+
+services:
+  api:
+    container_name: CoM-api
+    build: ../backend/
+    volumes:
+      - ../backend:/api
+    ports:
+      - "4000:4000"
+    environment:
+        JWTSECRET: ${JWTSECRET}
+        MONGODB_URI: ${MONGODB_URI}
+    
+  front:
+    container_name: CoM-front
+    build: ../frontend/
+    volumes:
+      - ../frontend:/app
+    ports:
+      - "3000:3000"
+    depends_on:
+      - api
+  
+volumes:
+  database:
