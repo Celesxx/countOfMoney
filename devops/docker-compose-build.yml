@@ -11,18 +11,6 @@ services:
     depends_on:
       - mongodb
 
-  mongodb:
-    container_name: CoM-database
-    image: mongodb
-    environment:
-      - PUID=1000
-      - PGID=1000
-    volumes:
-      - mongodb:/data/db
-    ports:
-      - "21017:21017"
-    restart: unless-stopped
-
   front:
     container_name: CoM-front
     build: ../frontend/
