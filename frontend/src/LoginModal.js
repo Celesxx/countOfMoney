@@ -2,6 +2,7 @@ import logo from './logo.svg';
 import './App.css';
 import Modal from 'react-modal';
 import React from 'react';
+import axios from 'axios';
 import coingecko from './coingecko.png';
 import times from './times-solid.svg';
 import './Modal.css';
@@ -33,6 +34,9 @@ const modalStyle = {
 function LoginModal() {
     let subtitle;
     const [modalIsOpen, setIsOpen] = React.useState(false);
+    const [email, setEmail] = React.useState("");
+    const [password, setPassword] = React.useState("");
+
 
     function openModal() {
         setIsOpen(true);
@@ -46,6 +50,27 @@ function LoginModal() {
     function closeModal() {
         setIsOpen(false);
     }
+
+    function register(event) {
+        event.preventDefault();
+        console.log("email = ", email)
+        console.log("username = ", email)
+
+        console.log("password = ", password)
+
+        axios.post('localhost:4000/users/register/', {
+            withCredentials: true,
+            data: {
+                email: email,
+                username: email,
+                password: password
+            }
+        })
+            .then(user => {
+                console.log("user = ", user)
+            })
+    }
+
     return (
         <div>
             <button onClick={openModal}>Log in</button>
@@ -63,14 +88,14 @@ function LoginModal() {
                     <form>
                         {/* <div className="text-align-center">Email</div> */}
                         <label>Email
-                            <input className="login-input"></input>
+                            <input onChange={e => setEmail(e.target.value)} className="login-input"></input>
                         </label>
                         <label>Password
-                            <input type="password" className="login-input"></input>
+                            <input onChange={e => setPassword(e.target.value)} type="password" className="login-input"></input>
                         </label>
                         {/* <div className="text-align-center">Password</div> */}
                         {/* <input /> */}
-                        <button className="login-button">Log in</button>
+                        <button onClick={e => register(e)} className="login-button">Log in</button>
                     </form>
                     <a className="account-creation" href="#">Create an account</a>
                 </div>
