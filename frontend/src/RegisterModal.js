@@ -6,7 +6,6 @@ import axios from 'axios';
 import coingecko from './coingecko.png';
 import times from './times-solid.svg';
 import './Modal.css';
-import { useEffect } from 'react';
 
 // import { Button } from 'react-bootstrap';
 
@@ -32,14 +31,15 @@ const modalStyle = {
 };
 
 
-function LoginModal(props) {
+function RegisterModal(props) {
     const [error, setError] = React.useState("");
     const [email, setEmail] = React.useState("");
     const [password, setPassword] = React.useState("");
 
 
-    const openModal = () => {
-        props.setLoginIsOpen(true);
+
+    function openModal() {
+        props.setRegisterIsOpen(true);
     }
 
     function afterOpenModal() {
@@ -49,37 +49,37 @@ function LoginModal(props) {
 
     function closeModal() {
         setError("")
-        props.setLoginIsOpen(false);
+        props.setRegisterIsOpen(false);
     }
 
-    function login(event) {
+    function register(event) {
         event.preventDefault();
 
         if (email && password) {
-            axios.post('http://localhost:4000/login/', {
+            axios.post('http://localhost:4000/users/register/', {
                 email: email,
-                password: password
+                password: password,
+                username: email
             })
                 .then(response => {
                     localStorage.setItem('token', response.data.token);
                     closeModal()
                 }).catch(error => {
-                    setError("Bad login / password");
+                    // setError("Bad login / password");
                     console.log(error)
                 })
         }
     }
 
-    function goRegister(e) {
-        props.setLoginIsOpen(false)
-        props.setRegisterIsOpen(true)
+    function goLogin(event) {
+        props.setRegisterIsOpen(false)
+        props.setLoginIsOpen(true)
     }
 
     return (
         <div>
-            <button onClick={openModal}>Log in</button>
             <Modal
-                isOpen={props.modalLoginIsOpen}
+                isOpen={props.modalRegisterIsOpen}
                 onAfterOpen={afterOpenModal}
                 onRequestClose={closeModal}
                 style={modalStyle}
@@ -87,26 +87,22 @@ function LoginModal(props) {
             >
                 <img onClick={closeModal} src={times} className="close" alt="close" />
                 <img src={coingecko} alt="Coingecko" className="coingecko-logo" />
-                {/* <h2 ref={(_subtitle) => (subtitle = _subtitle)}>Hello</h2> */}
                 <div className="login-box">
                     <form>
-                        {/* <div className="text-align-center">Email</div> */}
                         <label>Email
                             <input onChange={e => setEmail(e.target.value)} className="login-input"></input>
                         </label>
                         <label>Password
                             <input onChange={e => setPassword(e.target.value)} type="password" className="login-input"></input>
                         </label>
-                        {/* <div className="text-align-center">Password</div> */}
-                        {/* <input /> */}
-                        <button onClick={e => login(e)} className="login-button">Log in</button>
+                        <button onClick={e => register(e)} className="register-button">Create my account</button>
                     </form>
                     <p class="error">{error && error}</p>
-                    <a onClick={e => goRegister(e)} className="account-creation" href="#">Create an account</a>
+                    <a onClick={e => goLogin(e)} className="account-creation" href="#">Log in</a>
                 </div>
             </Modal>
         </div>
     );
 }
 
-export default LoginModal;
+export default RegisterModal;

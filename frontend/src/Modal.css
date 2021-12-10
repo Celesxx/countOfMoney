@@ -16,7 +16,7 @@ label {
 
 a.account-creation {
     text-align: center;
-    padding-top: 15px;
+    padding-top: 11px;
     /* padding-top: 2%; */
 }
 
@@ -64,7 +64,17 @@ a.account-creation {
     height: 58px;
     color: white;
     font-weight: bold;
-    font-size: 20;
+    font-size: 24px;
+}
+
+.register-button {
+    background-color: #8DC647;
+    border: 0;
+    border-radius: 10px;
+    height: 58px;
+    color: white;
+    font-weight: bold;
+    font-size: 24px;
 }
 
 .error {
