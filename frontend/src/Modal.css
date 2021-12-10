@@ -66,3 +66,9 @@ a.account-creation {
     font-weight: bold;
     font-size: 20;
 }
+
+.error {
+    color: red;
+    text-align: center;
+    margin-bottom: 0;
+}

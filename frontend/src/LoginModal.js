@@ -34,6 +34,7 @@ const modalStyle = {
 function LoginModal() {
     let subtitle;
     const [modalIsOpen, setIsOpen] = React.useState(false);
+    const [error, setError] = React.useState("");
     const [email, setEmail] = React.useState("");
     const [password, setPassword] = React.useState("");
 
@@ -48,27 +49,26 @@ function LoginModal() {
     }
 
     function closeModal() {
+        setError("")
         setIsOpen(false);
     }
 
     function register(event) {
         event.preventDefault();
-        console.log("email = ", email)
-        console.log("username = ", email)
 
-        console.log("password = ", password)
-
-        axios.post('localhost:4000/users/register/', {
-            withCredentials: true,
-            data: {
+        if (email && password) {
+            axios.post('http://localhost:4000/login/', {
                 email: email,
-                username: email,
                 password: password
-            }
-        })
-            .then(user => {
-                console.log("user = ", user)
             })
+                .then(response => {
+                    localStorage.setItem('token', response.data.token);
+                    closeModal()
+                }).catch(error => {
+                    setError("Bad login / password");
+                    console.log(error)
+                })
+        }
     }
 
     return (
@@ -97,6 +97,7 @@ function LoginModal() {
                         {/* <input /> */}
                         <button onClick={e => register(e)} className="login-button">Log in</button>
                     </form>
+                    <p class="error">{error && error}</p>
                     <a className="account-creation" href="#">Create an account</a>
                 </div>
             </Modal>
