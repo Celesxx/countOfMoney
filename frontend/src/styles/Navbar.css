@@ -1,0 +1,75 @@
+
+@font-face {
+    font-family: 'Inconsoleta';
+    src: url('../assets/fonts/Inconsolata-VariableFont_wdth\,wght.ttf') format('truetype');
+    font-weight: bold;
+  }
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.7rem 5%;
+    z-index: 1;
+    width: 100%;
+    background-color: #ffff
+}
+
+.navbar h1 {
+    font-family: 'Inconsoleta';
+    text-transform: uppercase;
+}
+
+.navbar .logo img {
+    height: 50px;
+    width: 50px;
+    margin-right: 5px;
+}
+
+.navbar ul {
+    display: flex;
+}
+
+a {
+    color: #1c44b2;
+    text-decoration: none;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    font-size: 1rem;
+    line-height: 1.6;
+    background-color: #f2f3f7;
+    color: #333;
+}
+
+.MuiButton-containedSizeLarge {
+    padding: 50px 0;
+}
+
+ul {
+    list-style: none;
+}
+
+img {
+    width: 100%;
+}
+
+.navbar a {
+    color: rgb(54, 54, 54);
+    padding: 0.45rem;
+    margin: 0 0.25rem;
+}
+
+.navbar a:hover {
+    color: var(--primary-color);
+}
+.navbar .logo {
+    display: flex;
+    align-items: center;
+  }
