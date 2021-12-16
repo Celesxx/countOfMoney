@@ -1,7 +1,7 @@
 {
 	"info": {
-		"_postman_id": "0500f701-2994-45cc-8ca4-b6aa60c1ab02",
-		"name": "Coun of money",
+		"_postman_id": "268be4bd-aacc-4aa2-a820-8b0b7e93ec74",
+		"name": "Count of money",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
@@ -55,7 +55,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"email\": \"cameron@epitech.eu\",\n    \"username\" : \"cameron\",\n    \"role\" : \"admin\",\n    \"password\" : \"123\"\n}",
+									"raw": "{\n    \"email\": \"gabin@epitech.eu\",\n    \"username\" : \"gabin\",\n    \"role\" : \"admin\",\n    \"password\" : \"1234\"\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -113,6 +113,13 @@
 										"key": "x-access-token",
 										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxOWY1YTUyZDU4YWUxMmNjYmIwOTlhMSIsImlhdCI6MTYzNzgzMzI5OCwiZXhwIjoxNjM4NDM4MDk4fQ.dfr2qy7XXmw6K4OLgSzSjjr7EHiDQkX6j5I6coxne2A",
 										"description": "admin\n",
+										"type": "text",
+										"disabled": true
+									},
+									{
+										"key": "x-access-token",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxYThlMTAzMzg0ZmYzZDczOTFkNGM0YSIsImlhdCI6MTYzODQ1NzYwMywiZXhwIjoxNjM5MDYyNDAzfQ.Ry3OXwaPqj1pvgwlH4YcDv2vjyvF04-2MfwhHJFZaRQ",
+										"description": "admin Gabin",
 										"type": "text"
 									}
 								],
@@ -298,12 +305,19 @@
 										"key": "x-access-token",
 										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxOWY1YTUyZDU4YWUxMmNjYmIwOTlhMSIsImlhdCI6MTYzNzgzMzI5OCwiZXhwIjoxNjM4NDM4MDk4fQ.dfr2qy7XXmw6K4OLgSzSjjr7EHiDQkX6j5I6coxne2A",
 										"description": "admin cameron",
+										"type": "text",
+										"disabled": true
+									},
+									{
+										"key": "x-access-token",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxYThlMTAzMzg0ZmYzZDczOTFkNGM0YSIsImlhdCI6MTYzODQ1NzYwMywiZXhwIjoxNjM5MDYyNDAzfQ.Ry3OXwaPqj1pvgwlH4YcDv2vjyvF04-2MfwhHJFZaRQ",
+										"description": "admin Gabin",
 										"type": "text"
 									}
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"email\": \"cameron@epitech.eu\",\n    \"username\" : \"Cameron\",\n    \"role\" : \"admin\",\n    \"password\" : \"123\"\n}",
+									"raw": "{\n    \"email\": \"gabin@epitech.eu\",\n    \"username\" : \"gab\",\n    \"role\" : \"admin\",\n    \"password\" : \"1234\"\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -370,7 +384,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"email\": \"arnaud@epitech.eu\",\n    \"password\" : \"123\"\n}",
+									"raw": "{\n    \"email\": \"gabin@epitech.eu\",\n    \"password\" : \"1234\"\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -378,14 +392,232 @@
 									}
 								},
 								"url": {
-									"raw": "localhost:4000/api/login",
+									"raw": "localhost:4000/login",
 									"host": [
 										"localhost"
 									],
 									"port": "4000",
 									"path": [
-										"api",
 										"login"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Crypto Test",
+					"item": [
+						{
+							"name": "Get Cryptos",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "x-access-token",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxYThlMTAzMzg0ZmYzZDczOTFkNGM0YSIsImlhdCI6MTYzOTEzMjY3NiwiZXhwIjoxNjM5NzM3NDc2fQ.CP3IGBDHawzULyru0vBamtpQgS8uEydfjtPwM3O_maA",
+										"description": "gabin",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:4000/cryptos",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "4000",
+									"path": [
+										"cryptos"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Crypto ?Cmids=",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "x-access-token",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxYThlMTAzMzg0ZmYzZDczOTFkNGM0YSIsImlhdCI6MTYzOTEzMjY3NiwiZXhwIjoxNjM5NzM3NDc2fQ.CP3IGBDHawzULyru0vBamtpQgS8uEydfjtPwM3O_maA",
+										"description": "gabin",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:4000/cryptos?cmids=bitcoin,ethereum",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "4000",
+									"path": [
+										"cryptos"
+									],
+									"query": [
+										{
+											"key": "cmids",
+											"value": "bitcoin,ethereum"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Post Cryptos",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"description": "gabin",
+										"key": "x-access-token",
+										"type": "text",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxYThlMTAzMzg0ZmYzZDczOTFkNGM0YSIsImlhdCI6MTYzOTEzMjY3NiwiZXhwIjoxNjM5NzM3NDc2fQ.CP3IGBDHawzULyru0vBamtpQgS8uEydfjtPwM3O_maA"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"Ethereum\",\n    \"url\" : \"http://youtube.com\",\n    \"code\" : \"ethereum\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:4000/cryptos",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "4000",
+									"path": [
+										"cryptos"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Crypto By Id",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"description": "gabin",
+										"key": "x-access-token",
+										"type": "text",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxYThlMTAzMzg0ZmYzZDczOTFkNGM0YSIsImlhdCI6MTYzOTEzMjY3NiwiZXhwIjoxNjM5NzM3NDc2fQ.CP3IGBDHawzULyru0vBamtpQgS8uEydfjtPwM3O_maA"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:4000/cryptos/bitcoin",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "4000",
+									"path": [
+										"cryptos",
+										"bitcoin"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Crypto By History",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"description": "gabin",
+										"key": "x-access-token",
+										"type": "text",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxYThlMTAzMzg0ZmYzZDczOTFkNGM0YSIsImlhdCI6MTYzOTEzMjY3NiwiZXhwIjoxNjM5NzM3NDc2fQ.CP3IGBDHawzULyru0vBamtpQgS8uEydfjtPwM3O_maA"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:4000/cryptos/bitcoin/history/daily",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "4000",
+									"path": [
+										"cryptos",
+										"bitcoin",
+										"history",
+										"daily"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Crypto By Date",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"description": "gabin",
+										"key": "x-access-token",
+										"type": "text",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxYThlMTAzMzg0ZmYzZDczOTFkNGM0YSIsImlhdCI6MTYzOTEzMjY3NiwiZXhwIjoxNjM5NzM3NDc2fQ.CP3IGBDHawzULyru0vBamtpQgS8uEydfjtPwM3O_maA"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:4000/cryptos/bitcoin/date/21-10-2017",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "4000",
+									"path": [
+										"cryptos",
+										"bitcoin",
+										"date",
+										"21-10-2017"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete Cryptos",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"description": "gabin",
+										"key": "x-access-token",
+										"type": "text",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxYThlMTAzMzg0ZmYzZDczOTFkNGM0YSIsImlhdCI6MTYzOTEzMjY3NiwiZXhwIjoxNjM5NzM3NDc2fQ.CP3IGBDHawzULyru0vBamtpQgS8uEydfjtPwM3O_maA"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"Shitcoin\",\n    \"url\" : \"http://youtube.com\",\n    \"code\" : \"shitcoin\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:4000/cryptos/shitcoin",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "4000",
+									"path": [
+										"cryptos",
+										"shitcoin"
 									]
 								}
 							},
