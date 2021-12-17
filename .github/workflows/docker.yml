@@ -28,7 +28,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@98669ae865ea3cffbcbaa878cf57c20bbf1c6c38
         with:
-          images: ${{ env.REGISTRY }}/gabinrn/count-of-money-api #${{ env.IMAGE_NAME }}/api
+          images: ${{ env.REGISTRY }}/Celesxx/count-of-money-api #${{ env.IMAGE_NAME }}/api
                   
 
       - name: Build and push Docker image
@@ -61,7 +61,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@98669ae865ea3cffbcbaa878cf57c20bbf1c6c38
         with:
-          images: ${{ env.REGISTRY }}/gabinrn/count-of-money-front #${{ env.IMAGE_NAME }}/front
+          images: ${{ env.REGISTRY }}/Celesxx/count-of-money-front #${{ env.IMAGE_NAME }}/front
                   
 
       - name: Build and push Docker image
