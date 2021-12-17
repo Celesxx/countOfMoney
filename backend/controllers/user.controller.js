@@ -144,6 +144,7 @@ exports.getUser = async (req, res) =>
                 {
                     //Get user by id 
                     await Users.findById(req.params.id)
+                    .populate('crypto','-__v')
                     .then(user => 
                     {
                         //Check if user exist
@@ -262,6 +263,7 @@ exports.updateUser = async (req, res) =>
                                 username: req.body.username,
                                 password: hash,
                                 role: req.body.role,
+                                image: req.body.image, 
 
                             }, {new: true})
                             .then(user => 

@@ -38,6 +38,7 @@ exports.createCrypto = async (req, res) =>
                         name: req.body.name,
                         url: req.body.url,
                         code: req.body.code,
+                        visible: req.body.visible,
                     })
                     
                     infoscrypto = cryptoFunction.getCoinList(req.body.code)
