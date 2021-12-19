@@ -8,6 +8,8 @@ const UserSchema = mongoose.Schema(
     password: { type: String, required: true},
     role: { type: String, default: "user"},
     token: { type: String, default: ""},
+    image: {type: String, required: false},
+    crypto: { type: [ _id= {type: mongoose.Schema.Types.ObjectId, ref: 'Crypto'} ]},
 });
 
 module.exports = mongoose.model('Users', UserSchema);

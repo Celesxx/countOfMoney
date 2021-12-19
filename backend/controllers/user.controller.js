@@ -144,6 +144,7 @@ exports.getUser = async (req, res) =>
                 {
                     //Get user by id 
                     await Users.findById(req.params.id)
+                    .populate('crypto','-__v')
                     .then(user => 
                     {
                         //Check if user exist
@@ -262,6 +263,7 @@ exports.updateUser = async (req, res) =>
                                 username: req.body.username,
                                 password: hash,
                                 role: req.body.role,
+                                image: req.body.image, 
 
                             }, {new: true})
                             .then(user => 
@@ -327,6 +329,68 @@ exports.deleteUser = async (req, res) =>
 
                 }else return errorHelper.contentNoAccess(res, resultRole.role)
                 
+            }else return errorHelper.contentNotAuth(res, resultToken.auth, resultToken.message, resultToken.error)
+        }
+    }catch(error)
+    {
+        console.log(`Server status : An error append to this function ${functionName} in the followed file 
+        ${filename}.\nServer status : The followed error is ${error}`)
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+//---------------------------------- logout user by id --------------------------------------
+
+exports.logoutUser = async (req, res) => 
+{
+
+    const functionName = "logoutUser"
+    const request = "logout"
+    const token = req.headers["x-access-token"]
+
+    try
+    {
+        //Check if token is on the request
+        if(!token) res.json({ auth: false, message: "You have to be logged !"})
+        else
+        {
+            //Check if the token is valid
+            let resultToken = await loginFunction.decryptToken(token)
+            if(resultToken.state == true & resultToken.auth == true)
+            {
+                //Check if he have the right to do that
+                let resultRole = await loginFunction.checkRole(token)
+                if(
+                    resultRole.state == true && resultRole.role == "admin" && resultRole.role != undefined 
+                    ||
+                    resultRole.state == true && resultRole.id.toString() == req.params.id.toString() && resultRole.role != undefined
+                )
+                {   
+                    //update the token user for logout
+                    Users.updateOne({_id: req.params.id},
+                    {
+                        token: "", 
+                    }, {new: true})
+                    .then(user => 
+                    {
+                        //Check if user exist
+                        if(user.length == 0) return errorHelper.contentNotFound(res, type, request, req.params.id)
+                        else return errorHelper.contentFound(res, type, request, user)
+                        
+                    }).catch(err => { return errorHelper.contentError(res, type, request, err) })
+                      
+                }else return errorHelper.contentNoAccess(res, resultRole.role)    
             }else return errorHelper.contentNotAuth(res, resultToken.auth, resultToken.message, resultToken.error)
         }
     }catch(error)
