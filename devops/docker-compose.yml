@@ -3,7 +3,7 @@ version: '3.8'
 services:
   api:
     container_name: CoM-api
-    build: ../backend/
+    image: ghcr.io/gabinrn/count-of-money-api:main
     volumes:
       - ../backend:/api
     ports:
@@ -14,13 +14,10 @@ services:
     
   front:
     container_name: CoM-front
-    build: ../frontend/
+    image: ghcr.io/gabinrn/count-of-money-front:main
     volumes:
       - ../frontend:/app
     ports:
       - "3000:3000"
     depends_on:
       - api
-  
-volumes:
-  database:

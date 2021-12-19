@@ -8,8 +8,9 @@ services:
       - ../backend:/api
     ports:
       - "4000:4000"
-    depends_on:
-      - mongodb
+    environment:
+        JWTSECRET: ${JWTSECRET}
+        MONGODB_URI: ${MONGODB_URI}
 
   front:
     container_name: CoM-front
@@ -20,6 +21,3 @@ services:
       - "3000:3000"
     depends_on:
       - api
-  
-volumes:
-  mongodb:
