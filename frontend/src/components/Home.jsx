@@ -6,7 +6,6 @@ const Home = () => {
   return (
     <section className="home">
       <div className="main-comp">
-        AH OUI
       </div>
     </section>
   )
