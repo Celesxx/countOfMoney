@@ -318,7 +318,7 @@ exports.deleteUser = async (req, res) =>
                 )
                 {
                     //Remove the user
-                    await Users.remove({_id: req.params.id})
+                    await Users.deleteOne({_id: req.params.id})
                     .then(async user => 
                     {
                         //Check if user exist

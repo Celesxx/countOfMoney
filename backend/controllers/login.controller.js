@@ -25,7 +25,6 @@ exports.getLogin = async (req, res) =>
                     Users.updateOne({email: result.email}, {token: token}, {new: true})
                     .then(data =>
                     {
-                        console.log("data", result)
                         res.status(200).json(
                         {
                             auth: true, 
