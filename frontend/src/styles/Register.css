@@ -9,6 +9,15 @@ form {
 
 }
 
+.login-input {
+    border-radius: 10px !important;
+    height: 45px;
+}
+
+input {
+    padding: 15px;
+}
+
 label {
     display: flex;
     flex-direction: column;

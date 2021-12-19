@@ -4,6 +4,8 @@ import axios from 'axios';
 import times from '../assets/images/times-solid.svg'
 import coingecko from '../assets/images/coingecko.png'
 import '../styles/Register.css';
+import { useHistory } from 'react-router-dom';
+
 
 const modalStyle = {
     content: {
@@ -27,23 +29,17 @@ const modalStyle = {
 
 
 function RegisterModal(props) {
+    const history = useHistory()
+    const [isOpen, setIsOpen] = React.useState(true);
     const [error, setError] = React.useState("");
     const [email, setEmail] = React.useState("");
     const [password, setPassword] = React.useState("");
 
 
-    // function openModal() {
-    //     props.setRegisterIsOpen(true);
-    // }
-
-    function afterOpenModal() {
-        // references are now sync'd and can be accessed.
-        // subtitle.style.color = '#f00';
-    }
-
     function closeModal() {
         setError("")
-        props.setRegisterIsOpen(false);
+        setIsOpen(false);
+        history.push("/")
     }
 
     function register(event) {
@@ -56,7 +52,9 @@ function RegisterModal(props) {
                 username: email
             })
                 .then(response => {
+                    console.log("response.data.token = ", response.data.token)
                     localStorage.setItem('token', response.data.token);
+
                     closeModal()
                 }).catch(error => {
                     // setError("Bad login / password");
@@ -64,38 +62,30 @@ function RegisterModal(props) {
                 })
         }
     }
-
-    function goLogin(event) {
-        props.setRegisterIsOpen(false)
-        props.setLoginIsOpen(true)
-    }
-
-    return (
-        <div>
-            <Modal
-                isOpen={props.modalRegisterIsOpen}
-                onAfterOpen={afterOpenModal}
-                onRequestClose={closeModal}
-                style={modalStyle}
-                contentLabel="Log in modal"
-            >
-                <img onClick={closeModal} src={times} className="close" alt="close" />
-                <img src={coingecko} alt="Coingecko" className="coingecko-logo" />
-                <div className="login-box">
-                    <form>
-                        <label>Email
-                            <input onChange={e => setEmail(e.target.value)} className="login-input"></input>
-                        </label>
-                        <label>Password
-                            <input onChange={e => setPassword(e.target.value)} type="password" className="login-input"></input>
-                        </label>
-                        <button onClick={e => register(e)} className="register-button">Create my account</button>
-                    </form>
-                    <p class="error">{error && error}</p>
-                    <a onClick={e => goLogin(e)} className="account-creation" href="#">Log in</a>
-                </div>
-            </Modal>
-        </div>
+return (
+        <Modal
+            ariaHideApp={false}
+            isOpen={props.modalRegisterIsOpen}
+            onRequestClose={closeModal}
+            style={modalStyle}
+            contentLabel="Register modal"
+        >
+            <img onClick={closeModal} src={times} className="close" alt="close" />
+            <img src={coingecko} alt="Coingecko" className="coingecko-logo" />
+            <div className="login-box">
+                <form>
+                    <label>Email
+                        <input onChange={e => setEmail(e.target.value)} className="login-input"></input>
+                    </label>
+                    <label>Password
+                        <input onChange={e => setPassword(e.target.value)} type="password" className="login-input"></input>
+                    </label>
+                    <button onClick={e => register(e)} className="register-button">Create my account</button>
+                </form>
+                <p class="error">{error && error}</p>
+                <a onClick={() => history.push("/login")} className="account-creation" href="#">Log in</a>
+            </div>
+        </Modal>
     );
 }
 
