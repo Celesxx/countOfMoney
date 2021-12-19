@@ -15,24 +15,41 @@ app.use(bodyParser.json({limit: "50mb"}));
 
     
 // Connecting to the database
-mongoose.Promise = global.Promise;
-mongoose.connect(process.env.MONGODB_URI , { useNewUrlParser: true, useUnifiedTopology: true})
-.then(async() => { console.log("Successfully connected to MongoDB."); })
-.catch(err => 
-{
+// mongoose.Promise = global.Promise;
+// .then(async() => { console.log("Successfully connected to MongoDB."); })
+// .catch(err => 
+// {
+//     console.log('Could not connect to MongoDB.')
+//     console.log(err)
+//     process.exit()
+// });
+
+
+const connectDB = async () => {
+  try 
+  {
+    await mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true})
+    console.log('Successfully connected to MongoDB.');
+  }catch (err) 
+  {
     console.log('Could not connect to MongoDB.')
     console.log(err)
     process.exit()
-});
+  }
+}
+
+connectDB();
 
 require('./routeur/user.router.js')(app)
-require('./routeur/login.router.js')(app)
+require('./routeur/crypto.router.js')(app)
+require('./routeur/article.router.js')(app)
 
 var server = app.listen(process.env.PORT || 4000, function () 
 { 
-  var host = server.address().address
-  var port = server.address().port    
-  console.log("App listening at http://%s:%s", host, port) 
+  server.emit("start")
+  var port = server.address().port   
+  console.log("App listening at http://localhost:%s", port) 
 })
 
-module.exports = server;
+
+module.exports = server

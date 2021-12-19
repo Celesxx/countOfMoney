@@ -80,3 +80,43 @@ exports.contentNotAuth = (res, auth, message, error) =>
         error: error
     }) 
 }
+
+exports.cryptoNotFound = (res, type, request, id) => 
+{   
+    return res.status(404).json(
+    {
+        state: false,
+        message: `The ${type} was not ${request}`,
+        error: `The ${type} was not found in the database with the following code : ${id}.`
+    })
+}
+
+exports.cryptosNotFound = (res, type, request) => 
+{   
+    return res.status(404).json(
+    {
+        state: false,
+        message: `The ${type} was not ${request}`,
+        error: `All ${type} was not found in the database.`
+    })
+}
+
+exports.cryptosWrongDateFormat = (res, type, request, date) => 
+{   
+    return res.status(404).json(
+    {
+        state: false,
+        message: `The ${type} was not ${request}`,
+        error: `This ${type} don't have the right date format: ${date}`
+    })
+}
+
+exports.cryptosWrongPeriod = (res, type, request) => 
+{   
+    return res.status(404).json(
+    {
+        state: false,
+        message: `The ${type} was not ${request}`,
+        error: `Wrong :period parameter, choose beetween : daily, hourly, minute`
+    })
+}
