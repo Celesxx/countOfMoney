@@ -1,0 +1,56 @@
+form {
+    text-align: center;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    height: calc(100% - 70px);
+    padding-left: 3%;
+    padding-right: 3%;
+
+}
+
+label {
+    display: flex;
+    flex-direction: column;
+}
+
+a.account-creation {
+    text-align: center;
+    padding-top: 11px;
+    /* padding-top: 2%; */
+}
+
+.coingecko-logo {
+    padding-top: 5%;
+    display: block;
+    margin: auto;
+    width: 75px;
+    height: 75px;
+    padding-left: 20px;
+}
+
+.close {
+    height: 20px;
+    width: 20px;
+    float: right;
+}
+
+.text-align-center {
+    text-align: center;
+}
+
+.register-button {
+    background-color: #8DC647;
+    border: 0;
+    border-radius: 10px;
+    height: 58px;
+    color: white;
+    font-weight: bold;
+    font-size: 24px;
+}
+
+.error {
+    color: red;
+    text-align: center;
+    margin-bottom: 0;
+}
