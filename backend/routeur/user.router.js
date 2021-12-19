@@ -3,11 +3,17 @@ module.exports = function(app) {
  
     app.use(cors())
     var userController = require('../controllers/user.controller.js')
-  
+    var loginController = require('../controllers/login.controller.js');
+
     app.post('/users/register', userController.createUser)
+    app.post('/users/login', loginController.getLogin)
+    app.post('/users/logout/:id', userController.logoutUser)
+
     app.get('/users/getUserByMail', userController.getUserByMail)
-    app.get('/users/:id', userController.getUser)
     app.get('/users/', userController.getUsers)
-    app.put('/users/:id', userController.updateUser)
+    app.get('/users/profile/:id', userController.getUser)
+
+    app.put('/users/profile/:id', userController.updateUser)
+
     app.delete('/users/:id', userController.deleteUser)
 }

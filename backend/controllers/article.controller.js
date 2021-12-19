@@ -1,6 +1,7 @@
 const Article = require('../models/article.model.js')
 const errorHelper = require('../helpers/error.helper')
 const loginFunction = require('../functions/login.function.js')
+const articleFunction = require('../functions/article.function.js')
 const filename = "article.controller.js"
 const type = "article"
 
@@ -92,10 +93,46 @@ exports.getArticles = async (req, res) =>
 
                 if(resultRole.state == true && resultRole.role != undefined)
                 {
-                    //Find all the articles
-                    await Article.find().select('-__v')
-                    .then(article => { return errorHelper.contentFound(res, type, request, article) })
-                    .catch(err => { return errorHelper.contentError(res, type, request, err) })
+
+                    if(req.query.length != 0)
+                    {
+                        let result = []
+                        for(const [key, value] in req.query)  
+                        {
+                            await Article.findOne({key: { $regex: value, $options: 'i' }})
+                            .then(article => result.push(article))
+                            .catch(err => { return errorHelper.contentError(res, type, request, err) })
+                        }
+                        return errorHelper.contentFound(res, type, request, result) 
+                    }else
+                    {
+                        //Find all the articles
+                        await Article.find().select('-__v')
+                        .then(article => { return errorHelper.contentFound(res, type, request, article) })
+                        .catch(err => { return errorHelper.contentError(res, type, request, err) })
+                    }
+
+                    const article = await articleFunction.getAllNews()
+
+                    for(let element of article.data)
+                    {
+                        const userExists = await Article.exists({ title: element.title })
+                        if (!userExists)
+                        {
+                            const article = new Article(
+                            {
+                                title: element.title,
+                                url: element.link,
+                                source: element.source,
+                                published_at: element.pubDate,
+                                visible: true
+                            })
+                        
+                            await article.save()
+                            .catch(err => { return errorHelper.contentError(res, type, request, err) })
+                        }
+                    }
+                   
 
                 }else return errorHelper.contentNoAccess(res, resultRole.role)
                 
@@ -287,7 +324,7 @@ exports.deleteArticle = async (req, res) =>
                     {
                         //Check if article exist
                         if(article.length == 0) return errorHelper.contentNotFound(res, type, request, req.params.id)
-                        else return errorHelper.contentFound(res, type, request, {state: true, message: "the user have been deleted"})
+                        else return errorHelper.contentFound(res, type, request, {state: true, message: "the article have been deleted"})
                         
                     }).catch(err => { return errorHelper.contentError(res, type, request, err) })  
 
