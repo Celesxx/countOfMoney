@@ -1,6 +1,12 @@
 import React from 'react';
 import './Coin.css';
 
+const handleClick = (coin) => {
+  console.log(coin);
+  
+}
+
+
 const Coin = ({
   name,
   price,
@@ -30,6 +36,13 @@ const Coin = ({
 
           <p className='coin-marketcap'>
             Mkt Cap: ${marketcap.toLocaleString()}
+          </p>
+        </div>
+        <div>
+          <p >
+            <button className='favorite' onClick={() => handleClick(Coin)}>
+              Favorite
+            </button>
           </p>
         </div>
       </div>
