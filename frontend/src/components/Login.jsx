@@ -4,6 +4,7 @@ import axios from "axios";
 import "../styles/Login.css";
 import times from "../assets/images/times-solid.svg";
 import coingecko from "../assets/images/coingecko.png";
+import { useHistory, Router } from "react-router-dom";
 // import { Button } from 'react-bootstrap';
 
 const modalStyle = {
@@ -49,7 +50,6 @@ function LoginModal(props) {
           password: password,
         })
         .then((response) => {
-          console.log("response.data.token = ", response.data.token);
           localStorage.setItem("token", response.data.token);
           closeModal();
         })
@@ -61,54 +61,47 @@ function LoginModal(props) {
   }
 
   return (
-    <div>
-      <button onClick={openModal}>Log in</button>
-      <Modal
-        isOpen={props.modalLoginIsOpen}
-        onAfterOpen={afterOpenModal}
-        onRequestClose={closeModal}
-        style={modalStyle}
-        contentLabel="Log in modal"
-      >
-        <img onClick={closeModal} src={times} className="close" alt="close" />
-        <img src={coingecko} alt="Coingecko" className="coingecko-logo" />
-        {/* <h2 ref={(_subtitle) => (subtitle = _subtitle)}>Hello</h2> */}
-        <div className="login-box">
-          <form>
-            {/* <div className="text-align-center">Email</div> */}
-            <label>
-              Email
-              <input
-                onChange={(e) => setEmail(e.target.value)}
-                className="login-input"
-              ></input>
-            </label>
-            <label>
-              Password
-              <input
-                onChange={(e) => setPassword(e.target.value)}
-                type="password"
-                className="login-input"
-              ></input>
-            </label>
-            {/* <div className="text-align-center">Password</div> */}
-            {/* <input /> */}
-            <button onClick={(e) => login(e)} className="login-button">
-              Log in
-            </button>
-          </form>
-          <p class="error">{error && error}</p>
-          <a
-            onClick={(e) => goRegister(e)}
-            className="account-creation"
-            href="#"
-          >
-            Create an account
-          </a>
-        </div>
-      </Modal>
-    </div>
+    <Modal
+      ariaHideApp={false}
+      isOpen={isOpen}
+      onRequestClose={closeModal}
+      style={modalStyle}
+      contentLabel="Log in modal"
+    >
+      <img onClick={closeModal} src={times} className="close" alt="close" />
+      <img src={coingecko} alt="Coingecko" className="coingecko-logo" />
+      {/* <h2 ref={(_subtitle) => (subtitle = _subtitle)}>Hello</h2> */}
+      <div className="login-box">
+        <form>
+          <label>
+            Email
+            <input
+              onChange={(e) => setEmail(e.target.value)}
+              className="login-input"
+            ></input>
+          </label>
+          <label>
+            Password
+            <input
+              onChange={(e) => setPassword(e.target.value)}
+              type="password"
+              className="login-input"
+            ></input>
+          </label>
+          <button onClick={(e) => login(e)} className="login-button">
+            Log in
+          </button>
+        </form>
+        <p class="error">{error && error}</p>
+        <a
+          onClick={() => history.push("/register")}
+          className="account-creation"
+          href="#"
+        >
+          Create an account
+        </a>
+      </div>
+    </Modal>
   );
 }
-
 export default LoginModal;
