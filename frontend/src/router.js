@@ -1,51 +1,35 @@
-import { Fragment, useState } from 'react';
-import { React } from 'react';
-import { BrowserRouter, Route } from 'react-router-dom';
+import Navigation from './components/Navigation/Navigation';
+import Logout from './components/Logout/Logout';
+import Home from "./pages/Home";
+import Login from "./pages/Login";
+import Register from "./pages/Register";
+import Settings from "./pages/Settings";
+import CryptoCurrencies from "./pages/Cryptocurrencies";
+import Profile from './pages/Profile';
+import CryptoInfo from './components/Cryptos/CryptoInfo';
 
-import Home from './components/Home'
-import Navbar from './components/Navbar'
-import RegisterModal from './components/Register'
-import LoginModal from './components/Login'
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import Footer from "./components/Footer/Footer";
 
-const Router = () => {
-  const [modalRegisterIsOpen, setRegisterIsOpen] = useState(true);
-  const [modalLoginIsOpen, setLoginIsOpen] = useState(false);
-
-
+function router() {
   return (
-    <BrowserRouter>
-      <Fragment>
-        <Navbar></Navbar>
-        <Route
-          exact
-          path='/'
-          render={() => (
-            <Home />
-          )} />
-        <section>
-          <Route
-            exact
-            path='/login'
-            render={() => (
-              <div>
-                {setLoginIsOpen && (
-                  <LoginModal setLoginIsOpen={setLoginIsOpen} modalLoginIsOpen={modalLoginIsOpen} setRegisterIsOpen={setRegisterIsOpen} />
-                )}
-              </div>
-            )}
-            />
-          <Route
-            exact
-            path='/register'
-            render={() => (
-              <div>{setRegisterIsOpen && (
-                <RegisterModal setRegisterIsOpen={setRegisterIsOpen} modalRegisterIsOpen={modalRegisterIsOpen} setLoginIsOpen={setLoginIsOpen} />
-              )}
-              </div>)}
-          />
-        </section>
-      </Fragment>
-    </BrowserRouter>
+      <div className={"router"}>
+          <Router>
+            <Navigation />
+              <Switch>
+                  <Route exact path="/" component={Home} />
+                  <Route exact path="/login" component={Login} />
+                  <Route exact path="/settings" component={Settings} />
+                  <Route exact path="/register" component={Register} />
+                  <Route exact path="/logout" component={Logout} />
+                  <Route exact path="/coins" component={CryptoCurrencies} />
+                  <Route path="/coins/:cmid" component={CryptoInfo} />
+                  <Route exact path="/profile/1" component={Profile} />
+              </Switch>
+          <Footer />
+          </Router>
+      </div>
   );
 }
-export default Router;
+
+export default router;

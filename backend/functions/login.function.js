@@ -1,34 +1,34 @@
-const bcrypt = require('bcrypt')
+const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 const Users = require('../models/user.model.js')
 const filename = "login.function.js"
 require("dotenv").config()
 
 
-exports.decryptToken = (token) => 
+exports.decryptToken = (token) =>
 {
     const functionName = "decryptToken"
     let result
-    try 
+    try
     {
         jwt.verify(token, process.env.JWTSECRET, (error, decoded) =>
         {
-            if(error) result = { 
+            if(error) result = {
                 auth: false,
                 state:  false,
                 message: "You seems to be not logged, please login",
                 error : error,
-    
+
             }
             else result = {
                 auth: true,
                 state: true,
                 message: "You are logged !"
             }
-        }) 
-    } catch (error) 
+        })
+    } catch (error)
     {
-        console.log(`Server status : An error append to this function ${functionName} in the followed file 
+        console.log(`Server status : An error append to this function ${functionName} in the followed file
         ${filename}.\nServer status : The followed error is ${error}`)
     }
 
@@ -39,24 +39,24 @@ exports.decryptToken = (token) =>
 
 
 
-exports.checkRole = async (token) => 
+exports.checkRole = async (token) =>
 {
     const functionName = "checkRole"
     let result = {}
-    
+
     try
     {
-        await Users.find({token: token}).then(data => 
+        await Users.find({token: token}).then(data =>
         {
-            result = 
+            result =
             {
                 state: true,
                 role : data[0].role,
                 id: data[0]._id
             }
-        }).catch(error => 
+        }).catch(error =>
         {
-            result = 
+            result =
             {
                 state: false,
                 message: `An error append, cannot find the users`,
@@ -68,7 +68,7 @@ exports.checkRole = async (token) =>
 
     }catch
     {
-        console.log(`Server status : An error append to this function ${functionName} in the followed file 
+        console.log(`Server status : An error append to this function ${functionName} in the followed file
         ${filename}.\nServer status : The followed error is ${error}`)
     }
 

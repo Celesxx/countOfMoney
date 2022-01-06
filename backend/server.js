@@ -2,22 +2,30 @@ var express = require('express');
 var app = express();
 const mongoose = require('mongoose');
 require("dotenv").config();
+var cors = require('cors');
+
+let corsOptions = {
+  origin: ['http://localhost:3000'],
+  credentials: true
+};
+app.use(cors(corsOptions));
 
 
 var bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded(
-{
-  limit: "50mb",
-  extended: false
-}));
-app.use(bodyParser.json({limit: "50mb"}));
+  {
+    limit: "50mb",
+    extended: false
+  }));
+app.use(bodyParser.json({ limit: "50mb" }));
 
 
-    
+
+
 // Connecting to the database
 // mongoose.Promise = global.Promise;
 // .then(async() => { console.log("Successfully connected to MongoDB."); })
-// .catch(err => 
+// .catch(err =>
 // {
 //     console.log('Could not connect to MongoDB.')
 //     console.log(err)
@@ -26,12 +34,10 @@ app.use(bodyParser.json({limit: "50mb"}));
 
 
 const connectDB = async () => {
-  try 
-  {
-    await mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true})
+  try {
+    await mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true })
     console.log('Successfully connected to MongoDB.');
-  }catch (err) 
-  {
+  } catch (err) {
     console.log('Could not connect to MongoDB.')
     console.log(err)
     process.exit()
@@ -44,11 +50,10 @@ require('./routeur/user.router.js')(app)
 require('./routeur/crypto.router.js')(app)
 require('./routeur/article.router.js')(app)
 
-var server = app.listen(process.env.PORT || 4000, function () 
-{ 
+var server = app.listen(process.env.PORT || 4000, function () {
   server.emit("start")
-  var port = server.address().port   
-  console.log("App listening at http://localhost:%s", port) 
+  var port = server.address().port
+  console.log("App listening at http://localhost:%s", port)
 })
 
 
