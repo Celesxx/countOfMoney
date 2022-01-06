@@ -1,7 +1,5 @@
-var cors = require('cors')
 module.exports = function(app) {
- 
-    app.use(cors())
+
     var userController = require('../controllers/user.controller.js')
     var loginController = require('../controllers/login.controller.js');
 

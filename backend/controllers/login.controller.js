@@ -1,23 +1,23 @@
 const Users = require('../models/user.model.js')
-const bcrypt = require('bcrypt')
+const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 require("dotenv").config()
 
-exports.getLogin = async (req, res) => 
+exports.getLogin = async (req, res) =>
 {
     const email = req.body.email
     const password = req.body.password
-    
-    Users.findOne({ email: email }).select('-__v').then(result => 
+
+    Users.findOne({ email: email }).select('-__v').then(result =>
     {
         if(result.email)
         {
             bcrypt.compare(password, result.password, (error, response) =>
-            { 
+            {
                 if(response)
                 {
                     const id = result.id
-                    const token = jwt.sign({id}, process.env.JWTSECRET, 
+                    const token = jwt.sign({id}, process.env.JWTSECRET,
                     {
                         expiresIn: "7d",
                     })
@@ -27,16 +27,16 @@ exports.getLogin = async (req, res) =>
                     {
                         res.status(200).json(
                         {
-                            auth: true, 
-                            message: "You are logged !", 
+                            auth: true,
+                            message: "You are logged !",
                             token: token,
                             id: result._id
                         })
                     })
                     .catch(error => res.status(404).json(
                     {
-                        state: false, 
-                        message: "Une erreur est survenu", 
+                        state: false,
+                        message: "Une erreur est survenu",
                         error : "The user does not exist on the database"
                     }))
 

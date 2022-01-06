@@ -1,7 +1,4 @@
-var cors = require('cors');
 module.exports = function(app) {
- 
-    app.use(cors());
     var cryptoController = require('../controllers/crypto.controller.js');
 
     app.post('/cryptos', cryptoController.createCrypto);
